@@ -1,0 +1,40 @@
+---
+- name: Enforce s3 bucket versioning on AWS account
+  # decsription for the purpose of playbook
+
+  hosts: localhost
+  # executes locally on the machine since it interacts with AWS through API
+
+  gather_facts: false
+  # skips the unnecessary step of gathering facts, making the execution faster
+
+  tasks:
+    - name: List S3 buckets in AWS account
+      # name of the 1st task
+
+      amazon.aws.s3_bucket_info:
+      # module talks with aws API to list the s3_buckets
+
+      register: result
+      # store the list of s3 to results
+    
+    - debug:
+      # module for printing the ourput
+
+        var: result
+        # print the s3 bucket and its details
+    
+    - name: Enable versioning on S3 bucket
+      # name of the 2nd task
+
+      amazon.aws.s3_bucket:
+      # manage various S3 bucket attributes
+
+        name: "{{ item.name }}"
+        # take the value which is name from the loop
+
+        versioning: yes
+        # enable versioning if its turned off
+
+      loop: "{{ result.buckets }}" 
+      # repeats over each s3 buckets returend inthe result
