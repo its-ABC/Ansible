@@ -21,5 +21,7 @@ ansible-playbook ec2_create.yaml --vault-password-file vault.pass
 ```
 
 
-### store the vault.pass in another location. we can also store the file which have aws passwords in another location. so when needed mention the path in the command 
-  ```ansible-playbook mention/the/path/ec2_create.yaml --vault-password-file mention/the/path/vault.pass```
+###  we can store the vault.pass and file which have aws passwords in another location. so when needed mention the path in the command 
+  ```
+  ansible-playbook mention/the/path/ec2_create.yaml --vault-password-file mention/the/path/vault.pass
+  ```
