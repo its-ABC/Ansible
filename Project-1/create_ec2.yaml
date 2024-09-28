@@ -1,0 +1,46 @@
+--- 
+# YAML syntax
+
+- hosts: localhost
+  # tasks will run on the local machine
+
+  connection: local
+  # 
+  tasks:
+  # list of actions (tasks) to perform
+
+  - name: start an instance with a public IP address
+    # simple info about the task
+
+    amazon.aws.ec2_instance:
+    # Ansible module used to create and manage EC2 instances on AWS
+
+      name: "ansible-instance"
+      # name of the EC2 instance
+
+      key_name: "prod-ssh-key"
+      # SSH key to be used for accessing the instance
+
+      # vpc_subnet_id: subnet-013744e41e8088axx
+
+      instance_type: t2.micro
+      # Defines the type of EC2 instance to launch
+
+      security_group: default
+      # will have default security group
+
+      region: us-east-1
+      # Specifies the AWS region where the EC2 instance will be launched
+
+      aws_access_key: "{{ec2_access_key}}"  # From vault as defined
+      aws_secret_key: "{{ec2_secret_key}}"  # From vault as defined  
+
+      network:
+        assign_public_ip: true
+        # instance gets a public IP address when it's launched
+
+      image_id: ami-04b70fa74e45c3917
+      # provide your own ami id
+      
+      tags:
+        Environment: Testing
