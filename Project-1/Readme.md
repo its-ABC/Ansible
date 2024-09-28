@@ -4,15 +4,21 @@ This project demonstrates how to create an EC2 instance on AWS using Ansible. Th
 
 1. create random password for vault
 
-```openssl rand -base64 2048 > vault.pass```
+```
+openssl rand -base64 2048 > vault.pass
+```
 
 2. encrypting the sensitive info
 
-```ansible-vault encrypt secret.yaml --vault-password-file vault.pass```
+```
+ansible-vault encrypt secret.yaml --vault-password-file vault.pass
+```
 
 3. running the playbook
 
-```ansible-playbook ec2_create.yaml --vault-password-file vault.pass```
+```
+ansible-playbook ec2_create.yaml --vault-password-file vault.pass
+```
 
 
 ### store the vault.pass in another location. we can also store the file which have aws passwords in another location. so when needed mention the path in the command 
