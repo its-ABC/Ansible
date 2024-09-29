@@ -11,7 +11,7 @@ openssl rand -base64 2048 > vault.pass
 2. encrypting the sensitive info
 
 ```
-ansible-vault encrypt secret.yaml --vault-password-file vault.pass
+ansible-vault encrypt secrets.yaml --vault-password-file vault.pass
 ```
 
 3. running the playbook
